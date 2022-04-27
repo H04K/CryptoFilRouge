@@ -8,6 +8,10 @@ const MainStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    main: {
+        height: "100%",
+        backgroundColor: "#EEEEEE",
+    }
 })
 
 export default MainStyle;

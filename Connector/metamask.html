@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Connect</title>
+</head>
+<body>
+    <h1>Connection Page</h1>
+</body>
+<script>
+    const initialize = () => {
+        //Basic Actions Section
+        const onboardButton = document.getElementById('connectButton');
+
+        //Created check function to see if the MetaMask extension is installed
+        const isMetaMaskInstalled = () => {
+            //Have to check the ethereum binding on the window object to see if it's installed
+            const { ethereum } = window;
+            return Boolean(ethereum && ethereum.isMetaMask);
+        };
+    };
+    const MetaMaskClientCheck = () => {
+        //Now we check to see if MetaMask is installed
+        if (!isMetaMaskInstalled()) {
+            //If it isn't installed we ask the user to click to install it
+            onboardButton.innerText = 'Click here to install MetaMask!';
+        } else {
+            //If it is installed we change our button text
+            onboardButton.innerText = 'Connect';
+        }
+    };
+    MetaMaskClientCheck();
+</script>
+</html>

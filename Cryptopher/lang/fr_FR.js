@@ -1,6 +1,27 @@
 const fr_FR = {
     "TitleHome": "Menu Principal",
     "TitleProfile": "Profil",
+    "TitleChats": "Chats",
+    "CodeCategory": "Developpeur",
+    "MusicCategory": "Musicien",
+    "PaintCategory": "Peintre",
+    "MyPosts": "Mes publications",
+    "connecteToMetamask": "Connection à Metamask",
+    "WalletNumber": "Numéro de coffre",
+    "PrivateKey": "Clef Privée",
+    "Password": "Mot de passe",
+    "Login": "Connexion",
+    "SearchBarPlaceHolder": "Rechercher",
+    "PostName": "Nom du projet",
+    "PostReward": "Recompense",
+    "PostDescription": "Description du projet",
+    "CreateButton": "Créer",
+    "BackButton": "Annuler",
+    "Create": "Créer",
+    "PreferLogin": "Se connecter",
+    "PreferCreate": "Créer un compte",
+    "CreateTitle": "Créer votre compte",
+    "LoginTitle": "Se connecter",
 }
 
 export default fr_FR;

@@ -3,8 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FontAwesome } from "@expo/vector-icons";
-import { NativeModules } from "react-native";
+import { NativeModules, Button } from "react-native";
+import { MainStyle } from '../assets/style/Mainstyle';
 
+const s_main = MainStyle;
 // Get the lang
 import Lang from "../lang/Lang";
 const sysOs = Platform.OS; // ('android', 'ios')
@@ -19,6 +21,8 @@ const lang = new Lang(locale);
 // components
 import Home from "../components/Home";
 import Profile from "../components/Profile";
+import Chats from "../components/Chats";
+import { CreatePost } from "../components/Posts";
 
 const Tabs = () => {
     return (
@@ -27,8 +31,18 @@ const Tabs = () => {
                 options={{
                     tabBarIcon: ({color, size }) => (
                         <FontAwesome name="home" color={color} size={26} />
+                        )
+                    }}/>
+            {/* <Tab.Screen 
+                name={(lang.trans("TitleCreatePost"))} 
+                component= { CreatePost }
+            /> */}
+            {/* <Tab.Screen name={lang.trans("TitleChats")} component={ Chats }
+                options={{
+                    tabBarIcon: ({color, size}) => (
+                        <FontAwesome name="comment" color={color} size={26} />
                     )
-                }}/>
+                }}/> */}
             <Tab.Screen name={lang.trans("TitleProfile")} component={ Profile }
                 options={{
                     tabBarIcon: ({color, size }) => (
@@ -36,7 +50,7 @@ const Tabs = () => {
                     )
                 }}/>
         </Tab.Navigator>
-    )
+    );
 }
 
 export default Tabs;
