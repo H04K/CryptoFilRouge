@@ -13,7 +13,7 @@ const FormStyle = StyleSheet.create({
         width: "auto",
         fontSize: 20,
         textAlign: "center",
-        color: "#FFFFFF",
+        color: "#000000",
         borderRadius: 5,
         backgroundColor: "#FFFFFF",
         padding: 10,
@@ -44,6 +44,7 @@ const FormStyle = StyleSheet.create({
         flexDirection: "row",
     },
     form_create_post: {
+        marginTop: "25%",
         alignItems: "center",
     },
     searchbar_view: {

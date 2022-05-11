@@ -1,13 +1,14 @@
-import React, { useCallback } from "react";
+import React, { useState } from "react";
 import { NativeModules, View, Button, Linking, TouchableOpacity, Text, TextInput, Pressable, KeyboardAvoidingView } from "react-native";
 // import WalletConnectProvider from '@walletconnect/react-native-dapp';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FormStyle } from "../assets/style/FormStyle";
-import MainStyle from "../assets/style/Mainstyle";
+import MainStyle from "../assets/style/MainStyle";
 import Poststyle from "../assets/style/Poststyle";
 
 // Get the lang
 import Lang from "../lang/Lang";
+import Tabs from "../navigator/Tabs";
 const sysOs = Platform.OS; // ('android', 'ios')
 let locale = ""
 if(sysOs == "android") {
@@ -83,11 +84,12 @@ const CreateForm = (props) => {
     )
 }
 
-const LoginForm = (props) => {
-    const [walletNum, onChangeWalletNum] = React.useState(null);
-    const [pKey, onChangePKey] = React.useState(null);
-    const [pwd, onChangePwd] = React.useState(null);
+const LoginForm = () => {
+    const [walletNum, onChangeWalletNum] = React.useState("");
+    const [pKey, onChangePKey] = React.useState("");
+    const [pwd, onChangePwd] = React.useState("");
     const [showCreate, setShowCreate] = React.useState(false);
+    const [isConnected, setIsConnected] = useState(false);
 
     const onButtonPress = () => {
         /*
@@ -96,6 +98,11 @@ const LoginForm = (props) => {
                 "adress" :"0x657a88388ce514e7F16E3227db525f8cA14fDf22",
                 "private_key" :"1e29503f7ad9f86e9ebc0435b3a11a038810c91b74437a918da918d727921adf",
                 "password" : "JeFaisUnTestLol"
+            }
+            {
+                "adress" :"0x7f1066541BBBc483442172A8d8186a8920316531",
+                "private_key" :"1805d6623f2f42450a4702ba6b2ac38e45f9353eef95af1687e0f2fb04eb210c",
+                "password" : "lol"
             }
             ///////////////////////////
         */
@@ -108,8 +115,17 @@ const LoginForm = (props) => {
         
         //console.log("inputs:"+JSON.stringify({wn: walletNum, pk: pKey, passwd: pwd}));
         console.log("inputs:"+params);
-        fetch('http://10.33.0.36:8000/login?'+params, {
+        fetch('https://fbc5-46-193-0-248.eu.ngrok.io/login?'+params, {
             method: 'POST',
+        })
+        .then((res) => res.json())
+        .then((code) => {
+            if(code === 200) 
+            {
+                console.log("Connection Successful");
+                setIsConnected(true);
+            }
+            else console.log("Error while connection");
         });
     }
 
@@ -118,6 +134,7 @@ const LoginForm = (props) => {
     }
 
     return (
+        isConnected ? <Tabs isConnected={true} adress={walletNum} private_key={pKey} /> :
         showCreate ? <CreateForm/> :
         <View style={FormStyle.globalForm}>
             <Text style={{fontSize: 30, fontWeight: "bold"}}>{lang.trans("Login")}</Text>
@@ -170,4 +187,32 @@ const LoginForm = (props) => {
     )
 }
 
-export {LoginForm, CreateForm};
+const ProfileForm = (props) => {
+    const [createform, setCreateForm] = useState(false);
+    const [loginform, setLoginForm] = useState(false);
+  
+    const createPress = () => {
+        console.log("create")
+        setCreateForm(true);
+    }
+  
+    const loginPress = () => {
+        console.log("Login");
+        setLoginForm(true);
+    }
+  
+    return (
+        createform ? (<CreateForm />) : (loginform ? (<LoginForm />) : (  
+                <View style={MainStyle.container}>
+                    <TouchableOpacity style={Poststyle.BigButton} onPress={loginPress}>
+                        <Text style={{fontSize: 20, fontWeight: "bold", color: "#000000"}}>{lang.trans("LoginTitle")}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={Poststyle.BigButton} onPress={createPress}>
+                        <Text style={{fontSize: 20, fontWeight: "bold", color:"#FFFFFF"}}>{lang.trans("CreateTitle")}</Text>
+                    </TouchableOpacity>
+                </View>
+            ))
+    );
+  }
+
+export {LoginForm, CreateForm, ProfileForm};

@@ -19,9 +19,13 @@ const fr_FR = {
     "BackButton": "Annuler",
     "Create": "Créer",
     "PreferLogin": "Se connecter",
-    "PreferCreate": "Créer un compte",
-    "CreateTitle": "Créer votre compte",
+    "PreferCreate": "S'inscrire",
+    "CreateTitle": "Inscription",
     "LoginTitle": "Se connecter",
+    "ContactOwner": "Contacter",
+    "NewPost": "Nouveau poste",
+    "NewMessage": "Nouveau message",
+    "Validate": "Valider",
 }
 
 export default fr_FR;

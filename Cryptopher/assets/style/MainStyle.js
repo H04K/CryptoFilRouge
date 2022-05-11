@@ -11,7 +11,16 @@ const MainStyle = StyleSheet.create({
     main: {
         height: "100%",
         backgroundColor: "#EEEEEE",
-    }
+    },
+    headerButton: {
+        backgroundColor: "#FFFFFF",
+        flexDirection: "row",
+        marginLeft: 5,
+        height: 30,
+        width: 70,
+        alignItems: "center",
+        justifyContent: "center",
+    },
 })
 
 export default MainStyle;

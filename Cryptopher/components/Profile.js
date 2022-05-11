@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, NativeModules, Platform, TouchableOpacity } from "react-native";
-import MainStyle from "../assets/style/Mainstyle";
+import MainStyle from "../assets/style/MainStyle";
 import { LoginForm, CreateForm } from "./Connect";
 const s_main = MainStyle;
 // Get the lang
@@ -44,3 +44,31 @@ const Profile = () => {
 }
 
 export default Profile;
+
+export const ProfileForm = (props) => {
+    const [createform, setCreateForm] = React.useState(false);
+    const [loginform, setLoginForm] = React.useState(false);
+
+    const createPress = () => {
+        console.log("create")
+        setCreateForm(true);
+    }
+
+    const loginPress = () => {
+        console.log("Login");
+        setLoginForm(true);
+    }
+
+    return (
+        createform ? (<CreateForm />) : (loginform ? (<LoginForm />) : (  
+                <View style={s_main.container}>
+                    <TouchableOpacity style={Poststyle.BigButton} onPress={loginPress}>
+                        <Text style={{fontSize: 20, fontWeight: "bold", color: "#000000"}}>{lang.trans("LoginTitle")}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={Poststyle.BigButton} onPress={createPress}>
+                        <Text style={{fontSize: 20, fontWeight: "bold", color:"#FFFFFF"}}>{lang.trans("CreateTitle")}</Text>
+                    </TouchableOpacity>
+                </View>
+            ))
+    );
+}
