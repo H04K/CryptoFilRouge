@@ -1,5 +1,7 @@
 from typing import Optional
 from eth_typing import Hash32
+from http import HTTPStatus
+from fastapi import FastAPI, HTTPException
 
 from fastapi import FastAPI
 from utils.string_contract import addOffer,getOffer
@@ -24,17 +26,27 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"Api Cryptopher"}
 
-@app.get("/add")
+@app.post("/add")
 def addOffers(name:str,reward:int,description:str,user_add:str,private_key:str):
-    response = addOffer(name,reward,description,user_add,private_key)
-    return response
+    try :
+        response = addOffer(name,reward,description,user_add,private_key)
+        return(HTTPStatus.OK)
+    except: 
+        raise HTTPException(status_code=400, detail="Error")
+   
+       
 
 @app.get("/getOffers")
-def getOffers(id:int,user_add:str):
-    response = getOffer(id,user_add)
-    return response
+def getOffers(user_add:str):
+    try :
+        response = getOffer(user_add)
+        return response
+    except: 
+        raise HTTPException(status_code=400, detail="Error")
+   
+ 
 
 @app.post('/login')
 def login(adress:str,private_key:str,password:str):
@@ -49,9 +61,9 @@ def login(adress:str,private_key:str,password:str):
     print(result)
     if result[0]['private_key'] == private_key:
         if result[0]['password'] == password:
-            return('succes')
+            return(HTTPStatus.OK)
         else:
-            return("error")
+            raise HTTPException(status_code=400, detail="Mauvaise infos")
     else :
-        return("error")
+        raise HTTPException(status_code=500, detail="erreur")
  

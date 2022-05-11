@@ -31,18 +31,31 @@
 		"inputs": [
 			{
 				"internalType": "address payable",
-				"name": "_validatorAdd",
+				"name": "_To",
 				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_OffersId",
+				"name": "_amount",
 				"type": "uint256"
 			}
 		],
-		"name": "fund",
+		"name": "pay",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "removeAd",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

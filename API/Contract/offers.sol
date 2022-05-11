@@ -19,7 +19,12 @@ contract Offers {
     OffersCount = 0;
    
   }
-  function addOffer(string memory _name,uint _reward , string memory _description) public {
+  function addOffer(address payable _toAddress,string memory _name,uint _reward , string memory _description) external payable {
+      
+        address myAddress = msg.sender;
+        if (myAddress.balance >= _reward) {
+            _toAddress.transfer(_reward);
+        }
     ads[OffersCount] = Ads(OffersCount,_name,_reward,_description);
     OffersCount++;
   }
